@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Meeting | Seth Graham</title>
+    <meta name="description" content="Schedule a meeting with Seth Graham, Finance Graduate Student.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="meeting-section" style="padding-top: 120px;">
+            <div class="container">
+                <h1 class="section-title">Book a Meeting</h1>
+                <p class="bio-summary">Let's discuss your project, financial analysis needs, or potential collaboration
+                    opportunities.</p>
+
+                <div class="meeting-container">
+                    <div class="timezone-info">
+                        <h2>Timezone Information</h2>
+                        <div class="timezone-card">
+                            <div class="timezone-item">
+                                <label>Your Timezone:</label>
+                                <select id="userTimezone" class="timezone-select">
+                                    <!-- Will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="timezone-item">
+                                <label>Your Current Time:</label>
+                                <div id="userTime" class="time-display">--:--</div>
+                            </div>
+                        </div>
+
+                        <div class="timezone-card lethbridge-card">
+                            <div class="timezone-item">
+                                <label>Lethbridge Time (Mountain Time):</label>
+                                <div id="lethbridgeTime" class="time-display lethbridge-time">--:--</div>
+                            </div>
+                            <div class="timezone-offset">
+                                <small id="timezoneOffset">Time difference: --</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meeting-form-container">
+                        <h2>Propose a Meeting Time</h2>
+                        <form id="meetingForm" class="meeting-form">
+                            <div class="form-group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Your Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="meetingDate">Preferred Date *</label>
+                                <input type="date" id="meetingDate" name="meetingDate" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="meetingTime">Preferred Time (Your Timezone) *</label>
+                                <input type="time" id="meetingTime" name="meetingTime" required>
+                            </div>
+
+                            <div class="time-conversion-display" id="conversionDisplay" style="display: none;">
+                                <div class="conversion-info">
+                                    <strong>This converts to:</strong>
+                                    <div class="converted-time">
+                                        <span id="convertedTime">--:--</span>
+                                        <span class="converted-label">Lethbridge Time (Mountain)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message / Agenda</label>
+                                <textarea id="message" name="message" rows="4"
+                                    placeholder="What would you like to discuss?"></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Send Meeting Request</button>
+                            </div>
+                        </form>
+
+                        <div id="formSuccess" class="form-message success" style="display: none;">
+                            <p>✓ Meeting request sent! I'll get back to you soon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meeting-info">
+                    <h3>Meeting Guidelines</h3>
+                    <ul class="detail-list">
+                        <li>Meetings are typically 30-60 minutes</li>
+                        <li>I'm generally available Monday-Friday, 9 AM - 5 PM Mountain Time</li>
+                        <li>Virtual meetings via Zoom or Google Meet</li>
+                        <li>I'll confirm the meeting time within 24 hours</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="meeting.js"></script>
+</body>
+
+</html>
