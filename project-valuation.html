@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Valuation Model | Seth Graham</title>
+    <meta name="description" content="DCF-based business valuation model by Seth Graham.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr;
+                    Back to Projects</a>
+
+                <h1 class="section-title">Business Valuation Model</h1>
+                <p class="overline">Excel Model • 2024</p>
+
+                <div class="project-detail-content">
+                    <section class="detail-section">
+                        <h2>Project Overview</h2>
+                        <p>A comprehensive Excel-based Discounted Cash Flow (DCF) model designed for business valuation.
+                            This model incorporates multiple scenarios, sensitivity analysis, and detailed financial
+                            projections to determine intrinsic business value.</p>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Model Architecture</h2>
+                        <p>The valuation model is structured across multiple interconnected worksheets:</p>
+                        <ul class="detail-list">
+                            <li><strong>Assumptions:</strong> Key inputs including growth rates, margins, and discount
+                                rates</li>
+                            <li><strong>Historical Financials:</strong> 5-year historical performance data</li>
+                            <li><strong>Projections:</strong> 10-year forward-looking financial forecasts</li>
+                            <li><strong>Free Cash Flow:</strong> Calculation of unlevered free cash flow</li>
+                            <li><strong>WACC Calculation:</strong> Weighted average cost of capital determination</li>
+                            <li><strong>Valuation:</strong> DCF calculation and terminal value</li>
+                            <li><strong>Sensitivity Analysis:</strong> Multiple scenario testing</li>
+                            <li><strong>Output Dashboard:</strong> Visual summary of valuation results</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Key Components</h2>
+                        <div class="findings-grid">
+                            <div class="finding-card">
+                                <h3>Revenue Projections</h3>
+                                <p>Multi-driver revenue model with segment-level forecasting</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>WACC Calculation</h3>
+                                <p>Dynamic cost of capital incorporating market data</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Scenario Analysis</h3>
+                                <p>Base, optimistic, and pessimistic case valuations</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Sensitivity Tables</h3>
+                                <p>Two-way data tables for key assumptions</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Valuation Methodology</h2>
+                        <p>The model employs industry-standard DCF methodology:</p>
+                        <ol class="detail-list">
+                            <li><strong>Project Free Cash Flows:</strong> Forecast operating cash flows for explicit
+                                period (10 years)</li>
+                            <li><strong>Calculate WACC:</strong> Determine appropriate discount rate based on capital
+                                structure and risk</li>
+                            <li><strong>Discount Cash Flows:</strong> Apply WACC to bring future cash flows to present
+                                value</li>
+                            <li><strong>Terminal Value:</strong> Calculate perpetuity value using Gordon Growth Model
+                            </li>
+                            <li><strong>Enterprise Value:</strong> Sum of PV of cash flows and terminal value</li>
+                            <li><strong>Equity Value:</strong> Adjust for net debt to arrive at equity value per share
+                            </li>
+                        </ol>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Scenario Analysis Results</h2>
+                        <p>Three scenarios were modeled to capture range of potential outcomes:</p>
+                        <div style="margin: 2rem 0;">
+                            <div
+                                style="background-color: rgba(17, 24, 39, 0.5); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Base Case Scenario</h4>
+                                <p><strong>Assumptions:</strong> 5% revenue growth, 18% EBITDA margin, 8.5% WACC</p>
+                                <p><strong>Valuation:</strong> $450M enterprise value ($32 per share)</p>
+                            </div>
+                            <div
+                                style="background-color: rgba(17, 24, 39, 0.5); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <h4 style="color: #10b981; margin-bottom: 0.5rem;">Optimistic Scenario</h4>
+                                <p><strong>Assumptions:</strong> 8% revenue growth, 20% EBITDA margin, 8.0% WACC</p>
+                                <p><strong>Valuation:</strong> $580M enterprise value ($41 per share)</p>
+                            </div>
+                            <div style="background-color: rgba(17, 24, 39, 0.5); padding: 1.5rem; border-radius: 8px;">
+                                <h4 style="color: #ef4444; margin-bottom: 0.5rem;">Pessimistic Scenario</h4>
+                                <p><strong>Assumptions:</strong> 2% revenue growth, 15% EBITDA margin, 9.5% WACC</p>
+                                <p><strong>Valuation:</strong> $320M enterprise value ($23 per share)</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Sensitivity Analysis</h2>
+                        <p>The model includes comprehensive sensitivity testing for key value drivers:</p>
+                        <ul class="detail-list">
+                            <li><strong>WACC vs. Terminal Growth:</strong> Tests valuation sensitivity to discount rate
+                                and perpetual growth assumptions</li>
+                            <li><strong>Revenue Growth vs. EBITDA Margin:</strong> Analyzes impact of top-line growth
+                                and profitability</li>
+                            <li><strong>CapEx vs. Working Capital:</strong> Evaluates effect of investment requirements
+                                on free cash flow</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Key finding: Valuation is most sensitive to WACC assumptions, with
+                            a 1% change in WACC resulting in approximately 15% change in enterprise value.</p>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Model Features</h2>
+                        <ul class="detail-list">
+                            <li>Dynamic linking between all worksheets for real-time updates</li>
+                            <li>Data validation and error checking to ensure model integrity</li>
+                            <li>Conditional formatting for easy identification of key metrics</li>
+                            <li>Charts and graphs for visual representation of projections</li>
+                            <li>Comprehensive documentation of formulas and assumptions</li>
+                            <li>Flexible structure allowing for easy customization</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Applications</h2>
+                        <p>This valuation model can be applied to various business scenarios:</p>
+                        <ul class="detail-list">
+                            <li>Mergers and acquisitions due diligence</li>
+                            <li>Investment decision-making</li>
+                            <li>Strategic planning and target setting</li>
+                            <li>Fairness opinions and expert testimony</li>
+                            <li>Private equity and venture capital investments</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Conclusion</h2>
+                        <p>This DCF model demonstrates proficiency in financial modeling, valuation theory, and Excel
+                            functionality. The comprehensive approach to scenario and sensitivity analysis provides
+                            stakeholders with a robust framework for understanding business value under various
+                            conditions.</p>
+                    </section>
+                </div>
+
+                <div class="project-navigation">
+                    <a href="project-financial-analysis.html" class="btn btn-secondary">&larr; Previous Project</a>
+                    <a href="projects.html" class="btn btn-primary">View All Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

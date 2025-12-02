@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Optimization Model | Seth Graham</title>
+    <meta name="description" content="Python-based portfolio optimization tool using Modern Portfolio Theory.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr;
+                    Back to Projects</a>
+
+                <h1 class="section-title">Portfolio Optimization Model</h1>
+                <p class="overline">Python Project • 2024</p>
+
+                <div class="project-detail-content">
+                    <section class="detail-section">
+                        <h2>Project Overview</h2>
+                        <p>A sophisticated Python-based portfolio optimization tool that implements Modern Portfolio
+                            Theory (MPT) to help investors construct efficient portfolios. The tool calculates optimal
+                            asset allocations that maximize expected returns for a given level of risk.</p>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Technical Implementation</h2>
+                        <p>The project leverages several powerful Python libraries to perform complex financial
+                            calculations:</p>
+                        <ul class="detail-list">
+                            <li><strong>NumPy:</strong> Matrix operations and numerical computations for portfolio
+                                calculations</li>
+                            <li><strong>Pandas:</strong> Data manipulation and analysis of historical price data</li>
+                            <li><strong>Matplotlib & Seaborn:</strong> Visualization of efficient frontier and portfolio
+                                allocations</li>
+                            <li><strong>yfinance:</strong> Real-time market data retrieval</li>
+                            <li><strong>SciPy:</strong> Optimization algorithms for finding optimal weights</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Key Features</h2>
+                        <div class="findings-grid">
+                            <div class="finding-card">
+                                <h3>Efficient Frontier</h3>
+                                <p>Calculates and visualizes the efficient frontier showing optimal risk-return
+                                    combinations</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Risk Metrics</h3>
+                                <p>Computes portfolio volatility, Sharpe ratio, and correlation matrices</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Asset Allocation</h3>
+                                <p>Determines optimal weights for each asset in the portfolio</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Backtesting</h3>
+                                <p>Historical performance analysis to validate optimization strategies</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Methodology</h2>
+                        <p>The optimization process follows these steps:</p>
+                        <ol class="detail-list">
+                            <li><strong>Data Collection:</strong> Retrieve historical price data for selected assets
+                            </li>
+                            <li><strong>Return Calculation:</strong> Calculate daily and annualized returns</li>
+                            <li><strong>Covariance Matrix:</strong> Compute asset correlations and covariance</li>
+                            <li><strong>Optimization:</strong> Use quadratic programming to find optimal weights</li>
+                            <li><strong>Visualization:</strong> Plot efficient frontier and optimal portfolio</li>
+                            <li><strong>Analysis:</strong> Generate performance metrics and recommendations</li>
+                        </ol>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Results & Insights</h2>
+                        <p>The model successfully demonstrates several key principles of portfolio management:</p>
+                        <ul class="detail-list">
+                            <li>Diversification reduces portfolio risk without necessarily reducing returns</li>
+                            <li>The optimal portfolio depends on the investor's risk tolerance</li>
+                            <li>Correlation between assets is crucial for effective diversification</li>
+                            <li>Regular rebalancing is necessary to maintain optimal allocations</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Future Enhancements</h2>
+                        <p>Planned improvements to expand the tool's capabilities:</p>
+                        <ul class="detail-list">
+                            <li>Integration of machine learning for return predictions</li>
+                            <li>Support for alternative assets (crypto, commodities, real estate)</li>
+                            <li>Monte Carlo simulation for risk assessment</li>
+                            <li>Web-based interface for easier accessibility</li>
+                            <li>Real-time portfolio tracking and alerts</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <div class="project-navigation">
+                    <a href="project-market-analysis.html" class="btn btn-secondary">&larr; Previous Project</a>
+                    <a href="project-financial-analysis.html" class="btn btn-primary">Next Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
