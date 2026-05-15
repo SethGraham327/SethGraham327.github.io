@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -75,6 +76,12 @@
 
                     <section class="detail-section">
                         <h2>Key Findings & Results</h2>
+                        <p>The interactive chart below visualizes the 2026 forecasted monthly electricity revenue (in thousands of dollars), demonstrating the pronounced seasonal pattern with peaks during the summer months:</p>
+                        
+                        <div class="chart-container" style="position: relative; height:400px; width:100%; margin: 2rem 0; background: var(--surface-color); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <canvas id="forecastChart"></canvas>
+                        </div>
+
                         <div class="findings-grid">
                             <div class="finding-card">
                                 <h3>Winning Model</h3>
@@ -116,6 +123,74 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('forecastChart').getContext('2d');
+            
+            const data = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: '2026 Forecast Revenue ($ Thousands)',
+                    data: [2568328, 2436716, 2495769, 2594871, 2868787, 3191401, 3522450, 3554569, 3352461, 2876495, 2506579, 2459102],
+                    borderColor: 'rgba(96, 165, 250, 1)', // Blue
+                    backgroundColor: 'rgba(96, 165, 250, 0.2)', // Semi-transparent blue for fill
+                    pointBackgroundColor: 'rgba(96, 165, 250, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(96, 165, 250, 1)',
+                    fill: true,
+                    tension: 0.4 // Smooth curves
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e2e8f0'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let value = context.raw;
+                                    return '$' + value.toLocaleString() + 'k';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#a0aec0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#a0aec0',
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M'; // Format as Millions
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
 </body>
 
 </html>

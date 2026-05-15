@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COVID-19 Household Spending Reallocation | Seth Graham</title>
-    <meta name="description" content="Econometric analysis of household spending by Seth Graham.">
+    <title>Tech Sales Compensation Analysis | Seth Graham</title>
+    <meta name="description" content="HR Analytics and Regression Modeling by Seth Graham.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -44,66 +44,59 @@
                 <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr;
                     Back to Projects</a>
 
-                <h1 class="section-title">COVID-19 Household Spending Reallocation</h1>
-                <p class="overline">Econometrics / Data Analysis</p>
+                <h1 class="section-title">Tech Sales Compensation Analysis</h1>
+                <p class="overline">HR Analytics / Regression Modeling • R</p>
 
                 <div class="project-detail-content">
                     <section class="detail-section">
                         <h2>Overview</h2>
-                        <p>This empirical research paper investigates how the COVID-19 pandemic affected household spending allocation across discretionary and non-discretionary categories. The study examines the nature of precautionary savings, consumer liquidity constraints, and whether the observed reallocation of capital persisted into the post-pandemic recovery period.</p>
-                        <a href="Final Project Working Doc V3.pdf" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">View Full PDF Report</a>
+                        <p>Organizations increasingly rely on quantitative analysis to guide workforce decisions, particularly in compensation and performance management. This project analyzes a dataset of 12,130 software sales representatives to develop regression models predicting salary and identifying the most influential factors driving compensation inequalities.</p>
+                        <a href="Final Project - Seth Graham.pdf" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">View Full PDF Report</a>
                     </section>
 
                     <section class="detail-section">
-                        <h2>Objectives</h2>
-                        <ul class="detail-list">
-                            <li>Analyze how household consumption decisions reflect underlying risk preferences and liquidity constraints during macroeconomic shocks.</li>
-                            <li>Determine if discretionary spending contracted disproportionately compared to essential spending.</li>
-                            <li>Assess whether pandemic-induced changes in capital allocation fully reversed during the economic recovery in 2023.</li>
-                        </ul>
+                        <h2>Key Compensation Drivers</h2>
+                        <p>The interactive chart below visualizes the marginal percentage impact on a baseline sales representative's salary for key demographic and personality factors, as determined by the final regression model:</p>
+                        
+                        <div class="chart-container" style="position: relative; height:400px; width:100%; margin: 2rem 0; background: var(--surface-color); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <canvas id="salaryImpactChart"></canvas>
+                        </div>
                     </section>
 
                     <section class="detail-section">
                         <h2>Methodology</h2>
-                        <p>The study leveraged a robust econometric approach to isolate causal and associative effects:</p>
                         <ul class="detail-list">
-                            <li><strong>Data Source:</strong> Utilized nationally representative data from Statistics Canada's Survey of Household Spending (SHS).</li>
-                            <li><strong>Empirical Framework:</strong> Implemented a Difference-in-Differences (DiD) framework comparing 2019 (pre-treatment baseline), 2021 (pandemic treatment), and 2023 (recovery).</li>
-                            <li><strong>Modeling:</strong> Estimated baseline, log-linear, and category-level fixed-effects models with heteroskedasticity-robust standard errors.</li>
+                            <li><strong>Model Development:</strong> Developed six increasingly refined OLS regression models, testing non-linear curvature and interaction effects.</li>
+                            <li><strong>Validation:</strong> Evaluated models using K-fold Cross Validation (k=10) and holdout sets to minimize Root Mean Squared Error (RMSE) and maximize generalization.</li>
+                            <li><strong>Data Preprocessing:</strong> Handled right-skewed salary data via log-transformation, and applied standard mean-centering to continuous predictors to mitigate multicollinearity.</li>
                         </ul>
                     </section>
 
                     <section class="detail-section">
-                        <h2>Key Findings & Results</h2>
-                        <p>The interactive chart below visualizes the core finding from the Difference-in-Differences (DiD) model: during the 2021 pandemic period, discretionary spending contracted disproportionately compared to essential spending.</p>
-                        
-                        <div class="chart-container" style="position: relative; height:300px; width:100%; margin: 2rem 0; background: var(--surface-color); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
-                            <canvas id="spendingChart"></canvas>
-                        </div>
-
+                        <h2>Key Findings</h2>
                         <div class="findings-grid">
                             <div class="finding-card">
-                                <h3>Stable Aggregate Levels</h3>
-                                <p>Aggregate household spending did not experience a large, uniform decline during the pandemic, likely due to fiscal transfers and forced savings stabilizing total consumption.</p>
+                                <h3>Curvature in Experience</h3>
+                                <p>Earnings rise with Age and Net Promoter Score (NPS), but at diminishing rates (negative quadratic terms).</p>
                             </div>
                             <div class="finding-card">
-                                <h3>Significant Reallocation</h3>
-                                <p>The DiD framework revealed a statistically significant reallocation. Discretionary spending declined disproportionately (an estimated -$558 relative shift per category) compared to essential goods.</p>
+                                <h3>The College Premium</h3>
+                                <p>Holding a college degree is associated with a highly statistically significant 15.3% premium in compensation.</p>
                             </div>
                             <div class="finding-card">
-                                <h3>Incomplete Reversal</h3>
-                                <p>The recovery period in 2023 showed only a partial reversal of these effects. Discretionary categories did not fully converge back to their pre-pandemic relative levels.</p>
+                                <h3>Gender Gap</h3>
+                                <p>Even after controlling for performance, experience, and education, women earned approximately 8.4% less than comparable men.</p>
                             </div>
                             <div class="finding-card">
-                                <h3>Persistent Shift in Preferences</h3>
-                                <p>The data suggests that macroeconomic shocks can induce persistent, longer-lasting shifts in consumption composition rather than temporary fluctuations.</p>
+                                <h3>Personality Disparities</h3>
+                                <p>Analysts and Sentinels earned substantially less (13.8% and 14.9%, respectively) compared to baseline Explorers.</p>
                             </div>
                         </div>
                     </section>
 
                     <section class="detail-section">
-                        <h2>Conclusion</h2>
-                        <p>These findings contribute to the literature by demonstrating that extreme macroeconomic shocks alter long-term consumption composition. For policymakers and investors, understanding these compositional adjustments is critical for anticipating the distributional and financial consequences of future economic shocks.</p>
+                        <h2>Managerial Recommendations</h2>
+                        <p>The final model serves as an equity-monitoring tool. The findings highlighted that gender and education gaps warrant review to ensure equitable pay practices. Furthermore, because certain personality profiles earn less after controlling for performance, management must ensure that role assignments or evaluation criteria do not unintentionally favour specific personality traits over tangible sales metrics.</p>
                     </section>
                 </div>
 
@@ -124,19 +117,24 @@
     <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('spendingChart').getContext('2d');
+            const ctx = document.getElementById('salaryImpactChart').getContext('2d');
             
+            // Data derived from the PDF Regression Coefficients
             const data = {
-                labels: ['Essential Spending (Baseline)', 'Discretionary Spending'],
+                labels: ['College Degree', 'Female (Gender Gap)', 'Personality: Analyst', 'Personality: Sentinel'],
                 datasets: [{
-                    label: 'Relative Shift During Pandemic ($ per category)',
-                    data: [0, -558],
+                    label: 'Salary Impact (%) relative to baseline',
+                    data: [15.3, -8.4, -13.8, -14.9],
                     backgroundColor: [
-                        'rgba(160, 174, 192, 0.7)', // Gray for baseline
-                        'rgba(248, 113, 113, 0.7)' // Red for negative shift
+                        'rgba(52, 211, 153, 0.7)', // Green for positive
+                        'rgba(248, 113, 113, 0.7)', // Red for negative
+                        'rgba(248, 113, 113, 0.7)',
+                        'rgba(248, 113, 113, 0.7)'
                     ],
                     borderColor: [
-                        'rgba(160, 174, 192, 1)',
+                        'rgba(52, 211, 153, 1)',
+                        'rgba(248, 113, 113, 1)',
+                        'rgba(248, 113, 113, 1)',
                         'rgba(248, 113, 113, 1)'
                     ],
                     borderWidth: 1,
@@ -150,6 +148,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar chart looks better for these labels
                     plugins: {
                         legend: {
                             display: false
@@ -157,24 +156,24 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return 'Shift: -$' + Math.abs(context.raw);
+                                    return context.raw + '%';
                                 }
                             }
                         }
                     },
                     scales: {
-                        y: {
+                        x: {
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
                             ticks: {
                                 color: '#a0aec0',
                                 callback: function(value) {
-                                    return '$' + value;
+                                    return value + '%';
                                 }
                             }
                         },
-                        x: {
+                        y: {
                             grid: {
                                 display: false
                             },
