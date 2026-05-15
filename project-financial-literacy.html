@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Diagnostic | Seth Graham</title>
+    <meta name="description" content="An interactive financial literacy diagnostic tool by Seth Graham.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .quiz-container {
+            background: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            min-height: 500px;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .option-btn.selected {
+            background: rgba(96, 165, 250, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .profile-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .profile-card h3 {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .level {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .review-section {
+            margin-top: 3rem;
+        }
+
+        .review-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #f87171;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+        }
+
+        .review-item.correct {
+            border-left-color: #34d399;
+        }
+
+        .review-item h4 {
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .review-item .explanation {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="index.html#awards">Awards</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="book-meeting.html">Book Meeting</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr; Back to Projects</a>
+
+                <h1 class="section-title">Financial Literacy Diagnostic</h1>
+                <p class="overline">Educational Tool / JavaScript Application</p>
+
+                <div class="quiz-container">
+                    
+                    <!-- Intro Screen -->
+                    <div id="intro-screen" class="screen active">
+                        <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Test Your Financial Knowledge</h2>
+                        <p style="color: #a0aec0; margin-bottom: 2rem; line-height: 1.6;">
+                            This diagnostic tool bridges the gap between academic finance and practical, consumer-facing education. 
+                            It tests fundamental concepts like compound interest, credit scoring, and predatory lending to generate your 
+                            personalized financial literacy profile.
+                        </p>
+                        <p style="color: #a0aec0; margin-bottom: 2.5rem;">
+                            <strong>Instructions:</strong> There are 8 multiple-choice questions. Your results and detailed explanations will be provided at the end.
+                        </p>
+                        <button id="start-btn" class="btn btn-primary">Start Diagnostic</button>
+                    </div>
+
+                    <!-- Quiz Screen -->
+                    <div id="quiz-screen" class="screen">
+                        <div class="progress-bar-container">
+                            <div id="progress-bar" class="progress-bar"></div>
+                        </div>
+                        <div style="color: #a0aec0; margin-bottom: 1rem; font-size: 0.9rem;" id="question-counter">Question 1 of 8</div>
+                        
+                        <div id="question-text" class="question-text">Question goes here?</div>
+                        
+                        <div id="options-container" class="options-grid">
+                            <!-- Options injected by JS -->
+                        </div>
+
+                        <div class="nav-buttons">
+                            <button id="prev-btn" class="btn btn-secondary" style="visibility: hidden;">Previous</button>
+                            <button id="next-btn" class="btn btn-primary" disabled>Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Results Screen -->
+                    <div id="results-screen" class="screen">
+                        <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Diagnostic Complete!</h2>
+                        <p style="color: #a0aec0;">Here is your personalized financial literacy profile.</p>
+
+                        <div class="results-grid">
+                            <div class="profile-card">
+                                <h3>Total Score</h3>
+                                <div id="final-score" class="score">0/8</div>
+                                <div id="profile-level" class="level">Beginner</div>
+                                <p id="profile-desc" style="color: #a0aec0; font-size: 0.9rem; margin-top: 1rem;"></p>
+                                <button id="restart-btn" class="btn btn-secondary" style="margin-top: 1.5rem;">Retake Quiz</button>
+                            </div>
+                            
+                            <div style="background: rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.05);">
+                                <h3 style="color: #a0aec0; font-size: 0.9rem; text-align: center; margin-bottom: 1rem; text-transform: uppercase;">Category Proficiency</h3>
+                                <div class="chart-wrapper">
+                                    <canvas id="radarChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-section">
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Detailed Review</h3>
+                            <div id="review-container">
+                                <!-- Explanations injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ==========================================
+            // CONFIGURATION: EASY TO EDIT QUESTIONS
+            // ==========================================
+            const quizQuestions = [
+                {
+                    question: "If you have $100 in a savings account with a 2% annual interest rate, how much will you have after 5 years if you leave the money to grow?",
+                    options: [
+                        "Exactly $110",
+                        "More than $110",
+                        "Less than $110",
+                        "I don't know"
+                    ],
+                    correctIndex: 1,
+                    category: "Saving & Investing",
+                    explanation: "More than $110. This demonstrates Compound Interest. Because you earn interest on your past interest (not just the initial $100), your money grows exponentially over time."
+                },
+                {
+                    question: "When dealing with inflation, if the inflation rate is 5% and your savings account earns 2%, your purchasing power is:",
+                    options: [
+                        "Increasing",
+                        "Staying the same",
+                        "Decreasing",
+                        "I don't know"
+                    ],
+                    correctIndex: 2,
+                    category: "General Knowledge",
+                    explanation: "Decreasing. If the cost of goods (inflation) rises faster than the interest on your savings, the real value of your money goes down."
+                },
+                {
+                    question: "Which of the following generally carries the highest interest rate?",
+                    options: [
+                        "A standard mortgage",
+                        "A personal line of credit",
+                        "A payday loan",
+                        "A student loan"
+                    ],
+                    correctIndex: 2,
+                    category: "Credit & Debt",
+                    explanation: "A payday loan. Payday loans are forms of predatory subprime credit. Their flat fees often translate to Effective Annual Percentage Rates (APRs) of 300% to 500%."
+                },
+                {
+                    question: "True or False: If you only make the minimum payment on your credit card each month, you will eventually pay off the balance without incurring significant interest.",
+                    options: [
+                        "True",
+                        "False"
+                    ],
+                    correctIndex: 1,
+                    category: "Credit & Debt",
+                    explanation: "False. Minimum payments are designed to cover mostly interest. Paying only the minimum drastically extends the life of the debt and multiplies the total cost."
+                },
+                {
+                    question: "In the context of investing, what is the general relationship between risk and return?",
+                    options: [
+                        "Higher risk usually means lower potential return",
+                        "Higher risk usually implies higher potential return",
+                        "Risk and return are completely unrelated",
+                        "I don't know"
+                    ],
+                    correctIndex: 1,
+                    category: "Saving & Investing",
+                    explanation: "Higher risk usually implies higher potential return. Investors require a 'risk premium' (the potential for greater profit) to justify taking on more volatile investments."
+                },
+                {
+                    question: "Which action will most negatively impact your credit score?",
+                    options: [
+                        "Checking your own credit score",
+                        "Missing a payment for 60 days",
+                        "Paying off a loan entirely",
+                        "Using 10% of your available credit limit"
+                    ],
+                    correctIndex: 1,
+                    category: "Credit & Debt",
+                    explanation: "Missing a payment. Payment history is the largest single factor in calculating your credit score. Checking your own score (a 'soft pull') does not hurt it."
+                },
+                {
+                    question: "What is the primary purpose of an emergency fund?",
+                    options: [
+                        "To save for a down payment on a house",
+                        "To invest in high-risk stocks",
+                        "To cover 3-6 months of essential living expenses during a crisis",
+                        "To pay for annual vacations"
+                    ],
+                    correctIndex: 2,
+                    category: "Saving & Investing",
+                    explanation: "To cover 3-6 months of expenses. An emergency fund acts as a financial shock absorber, preventing you from taking on high-cost debt when unexpected expenses or job loss occurs."
+                },
+                {
+                    question: "During the first few years of a 30-year fixed-rate mortgage, the majority of your monthly payment goes toward:",
+                    options: [
+                        "The principal loan amount",
+                        "The interest",
+                        "Property taxes",
+                        "It is split exactly 50/50"
+                    ],
+                    correctIndex: 1,
+                    category: "Credit & Debt",
+                    explanation: "The interest. Due to loan amortization, early payments are overwhelmingly interest-heavy because the interest is calculated on the large outstanding principal balance."
+                }
+            ];
+
+            // ==========================================
+            // APPLICATION LOGIC
+            // ==========================================
+            
+            // State
+            let currentQuestionIndex = 0;
+            let userAnswers = new Array(quizQuestions.length).fill(null);
+            let radarChartInstance = null;
+
+            // DOM Elements
+            const introScreen = document.getElementById('intro-screen');
+            const quizScreen = document.getElementById('quiz-screen');
+            const resultsScreen = document.getElementById('results-screen');
+            
+            const startBtn = document.getElementById('start-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            
+            const questionCounter = document.getElementById('question-counter');
+            const progressBar = document.getElementById('progress-bar');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+
+            // Initialize
+            startBtn.addEventListener('click', startQuiz);
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', resetQuiz);
+
+            function showScreen(screen) {
+                introScreen.classList.remove('active');
+                quizScreen.classList.remove('active');
+                resultsScreen.classList.remove('active');
+                screen.classList.add('active');
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                userAnswers = new Array(quizQuestions.length).fill(null);
+                showScreen(quizScreen);
+                loadQuestion();
+            }
+
+            function loadQuestion() {
+                const q = quizQuestions[currentQuestionIndex];
+                
+                // Update UI text
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+                questionText.textContent = q.question;
+                
+                // Update Progress
+                const progress = ((currentQuestionIndex) / quizQuestions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                // Render Options
+                optionsContainer.innerHTML = '';
+                q.options.forEach((opt, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.textContent = opt;
+                    if (userAnswers[currentQuestionIndex] === index) {
+                        btn.classList.add('selected');
+                    }
+                    btn.addEventListener('click', () => selectOption(index));
+                    optionsContainer.appendChild(btn);
+                });
+
+                // Button states
+                prevBtn.style.visibility = currentQuestionIndex === 0 ? 'hidden' : 'visible';
+                
+                if (userAnswers[currentQuestionIndex] !== null) {
+                    nextBtn.disabled = false;
+                } else {
+                    nextBtn.disabled = true;
+                }
+
+                if (currentQuestionIndex === quizQuestions.length - 1) {
+                    nextBtn.textContent = 'Submit';
+                } else {
+                    nextBtn.textContent = 'Next';
+                }
+            }
+
+            function selectOption(index) {
+                userAnswers[currentQuestionIndex] = index;
+                // Update UI selection
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    if (i === index) btn.classList.add('selected');
+                    else btn.classList.remove('selected');
+                });
+                nextBtn.disabled = false;
+            }
+
+            function prevQuestion() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    loadQuestion();
+                }
+            }
+
+            function nextQuestion() {
+                if (currentQuestionIndex < quizQuestions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                } else {
+                    // Progress bar to 100%
+                    progressBar.style.width = `100%`;
+                    setTimeout(showResults, 300);
+                }
+            }
+
+            function showResults() {
+                showScreen(resultsScreen);
+                
+                let score = 0;
+                let categoryScores = {
+                    "Saving & Investing": { total: 0, correct: 0 },
+                    "Credit & Debt": { total: 0, correct: 0 },
+                    "General Knowledge": { total: 0, correct: 0 }
+                };
+
+                const reviewContainer = document.getElementById('review-container');
+                reviewContainer.innerHTML = '';
+
+                // Calculate scores and build review
+                quizQuestions.forEach((q, index) => {
+                    const userAnswer = userAnswers[index];
+                    const isCorrect = userAnswer === q.correctIndex;
+                    
+                    if (isCorrect) score++;
+                    
+                    // Track category logic
+                    if (categoryScores[q.category]) {
+                        categoryScores[q.category].total++;
+                        if (isCorrect) categoryScores[q.category].correct++;
+                    }
+
+                    // Build review HTML
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.className = `review-item ${isCorrect ? 'correct' : ''}`;
+                    reviewDiv.innerHTML = `
+                        <div style="display:flex; justify-content:space-between;">
+                            <h4>Question ${index + 1}</h4>
+                            <span style="color: ${isCorrect ? '#34d399' : '#f87171'}; font-weight:600;">${isCorrect ? 'Correct' : 'Incorrect'}</span>
+                        </div>
+                        <p style="color: white; margin-bottom: 0.5rem;">${q.question}</p>
+                        <p style="color: #a0aec0; font-size: 0.9rem;">Your Answer: ${userAnswer !== null ? q.options[userAnswer] : 'Skipped'}</p>
+                        ${!isCorrect ? `<p style="color: #34d399; font-size: 0.9rem;">Correct Answer: ${q.options[q.correctIndex]}</p>` : ''}
+                        <div class="explanation"><strong>Explanation:</strong> ${q.explanation}</div>
+                    `;
+                    reviewContainer.appendChild(reviewDiv);
+                });
+
+                // Update Profile Card
+                document.getElementById('final-score').textContent = `${score}/${quizQuestions.length}`;
+                
+                let level = "Beginner";
+                let desc = "You're just starting your financial journey! Review the explanations below to build a stronger foundation.";
+                if (score >= 4 && score <= 6) {
+                    level = "Developing";
+                    desc = "You have a solid grasp of the basics, but there are a few advanced concepts you can improve on.";
+                } else if (score >= 7) {
+                    level = "Advanced";
+                    desc = "Excellent! You demonstrate a highly sophisticated understanding of personal finance mechanics.";
+                }
+                
+                document.getElementById('profile-level').textContent = level;
+                document.getElementById('profile-desc').textContent = desc;
+
+                // Render Chart
+                renderChart(categoryScores);
+            }
+
+            function renderChart(categoryScores) {
+                const labels = Object.keys(categoryScores);
+                const data = labels.map(cat => {
+                    const catData = categoryScores[cat];
+                    return catData.total > 0 ? (catData.correct / catData.total) * 100 : 0;
+                });
+
+                if (radarChartInstance) {
+                    radarChartInstance.destroy();
+                }
+
+                const ctx = document.getElementById('radarChart').getContext('2d');
+                radarChartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Proficiency (%)',
+                            data: data,
+                            backgroundColor: 'rgba(96, 165, 250, 0.2)',
+                            borderColor: 'rgba(96, 165, 250, 1)',
+                            pointBackgroundColor: 'rgba(96, 165, 250, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(96, 165, 250, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                pointLabels: {
+                                    color: '#e2e8f0',
+                                    font: { size: 12 }
+                                },
+                                ticks: {
+                                    display: false,
+                                    min: 0,
+                                    max: 100,
+                                    stepSize: 25
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw.toFixed(0) + '% Correct';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function resetQuiz() {
+                showScreen(introScreen);
+            }
+        });
+    </script>
+</body>
+
+</html>
