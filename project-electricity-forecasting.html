@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Revenue Forecasting | Seth Graham</title>
+    <meta name="description" content="Time Series Forecasting of Electricity Revenue in Florida by Seth Graham.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="index.html#awards">Awards</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="book-meeting.html">Book Meeting</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr;
+                    Back to Projects</a>
+
+                <h1 class="section-title">Forecasting Monthly Electricity Revenue</h1>
+                <p class="overline">Data Science / Time Series Analysis • R</p>
+
+                <div class="project-detail-content">
+                    <section class="detail-section">
+                        <h2>Overview</h2>
+                        <p>This empirical study develops statistical models to forecast monthly electricity revenue for the state of Florida. Because electricity demand exhibits strong seasonal patterns and is heavily influenced by long-term economic trends, reliable revenue forecasts are critical for infrastructure planning, pricing strategies, and energy supply management.</p>
+                        <a href="Term Project - Seth Graham.pdf" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">View Full PDF Report</a>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Objectives</h2>
+                        <ul class="detail-list">
+                            <li>Process and clean decades of historical energy data (1990-2025) from the U.S. Energy Information Administration (EIA).</li>
+                            <li>Develop and evaluate multiple competing forecasting models, including ETS and SARIMA frameworks.</li>
+                            <li>Generate highly reliable revenue forecasts for the year 2026.</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Methodology</h2>
+                        <p>The analysis employed rigorous time series econometric techniques in R:</p>
+                        <ul class="detail-list">
+                            <li><strong>Data Processing:</strong> Aggregated sector-level revenue and addressed heteroskedasticity using Box-Cox variance stabilization.</li>
+                            <li><strong>Model Building:</strong> Evaluated both Exponential Smoothing with Trend and Seasonality (ETS) and Seasonal Autoregressive Integrated Moving Average (SARIMA) models.</li>
+                            <li><strong>Validation:</strong> Utilized a holdout validation design with 2025 reserved as the out-of-sample test period. Evaluated models based on RMSE, MAE, MSE, and MAPE.</li>
+                            <li><strong>Diagnostics:</strong> Assessed stationarity using ADF/KPSS tests and verified residual white noise using Ljung-Box testing and ACF/PACF visual diagnostics.</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Key Findings & Results</h2>
+                        <div class="findings-grid">
+                            <div class="finding-card">
+                                <h3>Winning Model</h3>
+                                <p>The best-performing model was a SARIMA specification: ARIMA(3,1,0)(2,1,0)[12] applied to post-2010 data.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>High Accuracy</h3>
+                                <p>The model achieved a remarkably low Mean Absolute Percentage Error (MAPE) of 3.2% on the 2025 holdout set.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>2026 Forecast</h3>
+                                <p>Revenue is forecasted to maintain strong seasonality, peaking in July and August at approximately $3.5 billion.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Residual White Noise</h3>
+                                <p>Ljung-Box testing (p=0.1646) confirmed no statistically significant autocorrelation remained in the residuals.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Conclusion</h2>
+                        <p>The study demonstrated that seasonal time-series models (specifically SARIMA) provide an effective and interpretable approach for forecasting electricity revenue. By capturing both short-term autoregressive dynamics and recurring seasonal patterns, these models can support high-level decision-making within the energy sector.</p>
+                    </section>
+                </div>
+
+                <div class="project-navigation">
+                    <a href="projects.html" class="btn btn-secondary">View All Projects</a>
+                    <a href="project-covid-spending.html" class="btn btn-primary">Next Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

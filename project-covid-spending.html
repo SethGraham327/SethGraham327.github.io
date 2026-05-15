@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Household Spending Reallocation | Seth Graham</title>
+    <meta name="description" content="Econometric analysis of household spending by Seth Graham.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="index.html#awards">Awards</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="book-meeting.html">Book Meeting</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr;
+                    Back to Projects</a>
+
+                <h1 class="section-title">COVID-19 Household Spending Reallocation</h1>
+                <p class="overline">Econometrics / Data Analysis</p>
+
+                <div class="project-detail-content">
+                    <section class="detail-section">
+                        <h2>Overview</h2>
+                        <p>This empirical research paper investigates how the COVID-19 pandemic affected household spending allocation across discretionary and non-discretionary categories. The study examines the nature of precautionary savings, consumer liquidity constraints, and whether the observed reallocation of capital persisted into the post-pandemic recovery period.</p>
+                        <a href="Final Project Working Doc V3.pdf" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">View Full PDF Report</a>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Objectives</h2>
+                        <ul class="detail-list">
+                            <li>Analyze how household consumption decisions reflect underlying risk preferences and liquidity constraints during macroeconomic shocks.</li>
+                            <li>Determine if discretionary spending contracted disproportionately compared to essential spending.</li>
+                            <li>Assess whether pandemic-induced changes in capital allocation fully reversed during the economic recovery in 2023.</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Methodology</h2>
+                        <p>The study leveraged a robust econometric approach to isolate causal and associative effects:</p>
+                        <ul class="detail-list">
+                            <li><strong>Data Source:</strong> Utilized nationally representative data from Statistics Canada's Survey of Household Spending (SHS).</li>
+                            <li><strong>Empirical Framework:</strong> Implemented a Difference-in-Differences (DiD) framework comparing 2019 (pre-treatment baseline), 2021 (pandemic treatment), and 2023 (recovery).</li>
+                            <li><strong>Modeling:</strong> Estimated baseline, log-linear, and category-level fixed-effects models with heteroskedasticity-robust standard errors.</li>
+                        </ul>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Key Findings & Results</h2>
+                        <div class="findings-grid">
+                            <div class="finding-card">
+                                <h3>Stable Aggregate Levels</h3>
+                                <p>Aggregate household spending did not experience a large, uniform decline during the pandemic, likely due to fiscal transfers and forced savings stabilizing total consumption.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Significant Reallocation</h3>
+                                <p>The DiD framework revealed a statistically significant reallocation. Discretionary spending declined disproportionately (an estimated -$558 relative shift per category) compared to essential goods.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Incomplete Reversal</h3>
+                                <p>The recovery period in 2023 showed only a partial reversal of these effects. Discretionary categories did not fully converge back to their pre-pandemic relative levels.</p>
+                            </div>
+                            <div class="finding-card">
+                                <h3>Persistent Shift in Preferences</h3>
+                                <p>The data suggests that macroeconomic shocks can induce persistent, longer-lasting shifts in consumption composition rather than temporary fluctuations.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>Conclusion</h2>
+                        <p>These findings contribute to the literature by demonstrating that extreme macroeconomic shocks alter long-term consumption composition. For policymakers and investors, understanding these compositional adjustments is critical for anticipating the distributional and financial consequences of future economic shocks.</p>
+                    </section>
+                </div>
+
+                <div class="project-navigation">
+                    <a href="projects.html" class="btn btn-secondary">View All Projects</a>
+                    <a href="project-electricity-forecasting.html" class="btn btn-primary">Next Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
