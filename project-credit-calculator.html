@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Cost Credit Calculator | Seth Graham</title>
+    <meta name="description" content="An interactive calculator demonstrating the true cost of payday loans and high-cost credit.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .calc-panel {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .result-card h3 {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .result-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .result-card.danger .value {
+            color: #f87171;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            color: #a0aec0;
+            font-weight: 500;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SG.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="index.html#awards">Awards</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="book-meeting.html">Book Meeting</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="project-detail" style="padding-top: 120px;">
+            <div class="container">
+                <a href="projects.html" class="link-arrow" style="margin-bottom: 2rem; display: inline-block;">&larr; Back to Projects</a>
+
+                <h1 class="section-title">High-Cost Credit Cost Calculator</h1>
+                <p class="overline">Financial Literacy / Interactive Web Application</p>
+
+                <p style="max-width: 800px; color: #a0aec0; margin-bottom: 2rem;">This interactive tool demonstrates the financial realities of payday loans and subprime credit. By calculating the Effective Annual Percentage Rate (APR) and simulating the "debt spiral" of rollover borrowing, it highlights the severe consumer finance harms associated with predatory lending.</p>
+
+                <div class="calculator-grid">
+                    <!-- Inputs Panel -->
+                    <div class="calc-panel">
+                        <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Loan Parameters</h2>
+                        
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount ($)</label>
+                            <input type="number" id="loanAmount" value="500" min="50" step="50">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feePer100">Fee per $100 Borrowed ($)</label>
+                            <input type="number" id="feePer100" value="15" min="1" step="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (Days)</label>
+                            <input type="number" id="loanTerm" value="14" min="1" max="365">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cycles">Number of Rollover Cycles</label>
+                            <input type="range" id="cycles" value="0" min="0" max="10" style="width: 100%; margin: 10px 0;">
+                            <div style="display: flex; justify-content: space-between; color: #a0aec0; font-size: 0.9rem;">
+                                <span>0 (Pay off immediately)</span>
+                                <span id="cyclesLabel">0 Cycles</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Panel -->
+                    <div class="calc-panel">
+                        <div class="results-grid">
+                            <div class="result-card danger">
+                                <h3>Effective APR</h3>
+                                <div class="value" id="aprResult">391%</div>
+                            </div>
+                            <div class="result-card">
+                                <h3>Total Fees Paid</h3>
+                                <div class="value" id="totalFeesResult">$75</div>
+                            </div>
+                            <div class="result-card">
+                                <h3>Total Repayment</h3>
+                                <div class="value" id="totalRepaymentResult">$575</div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-bottom: 1rem;">The Debt Spiral Visualization</h3>
+                        <div style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="debtChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-panel" style="margin-top: 2rem;">
+                    <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Cost Comparison (Over Same Duration)</h2>
+                    <p style="color: #a0aec0; margin-bottom: 1rem;">How does this payday loan compare to traditional forms of credit if held for the exact same amount of time?</p>
+                    
+                    <div style="overflow-x: auto;">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Credit Type</th>
+                                    <th>Typical APR</th>
+                                    <th>Interest/Fees Incurred</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color: #f87171;">Payday Loan (Current)</strong></td>
+                                    <td id="compPaydayApr">391%</td>
+                                    <td id="compPaydayCost">$75.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Credit Card</td>
+                                    <td>21.99%</td>
+                                    <td id="compCcCost">$4.22</td>
+                                </tr>
+                                <tr>
+                                    <td>Personal Line of Credit</td>
+                                    <td>10.50%</td>
+                                    <td id="compLocCost">$2.01</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seth Graham. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inputs
+            const amountInput = document.getElementById('loanAmount');
+            const feeInput = document.getElementById('feePer100');
+            const termInput = document.getElementById('loanTerm');
+            const cyclesInput = document.getElementById('cycles');
+            const cyclesLabel = document.getElementById('cyclesLabel');
+
+            // Outputs
+            const aprResult = document.getElementById('aprResult');
+            const totalFeesResult = document.getElementById('totalFeesResult');
+            const totalRepaymentResult = document.getElementById('totalRepaymentResult');
+            
+            const compPaydayApr = document.getElementById('compPaydayApr');
+            const compPaydayCost = document.getElementById('compPaydayCost');
+            const compCcCost = document.getElementById('compCcCost');
+            const compLocCost = document.getElementById('compLocCost');
+
+            // Chart
+            const ctx = document.getElementById('debtChart').getContext('2d');
+            let debtChart;
+
+            function calculate() {
+                const amount = parseFloat(amountInput.value) || 0;
+                const feePer100 = parseFloat(feeInput.value) || 0;
+                const termDays = parseFloat(termInput.value) || 14;
+                const rollovers = parseInt(cyclesInput.value) || 0;
+
+                cyclesLabel.textContent = rollovers + (rollovers === 1 ? ' Cycle' : ' Cycles');
+
+                // Core Calculations
+                const singleCycleFee = (amount / 100) * feePer100;
+                const totalCycles = 1 + rollovers;
+                const totalFees = singleCycleFee * totalCycles;
+                const totalRepayment = amount + totalFees;
+                const totalDays = termDays * totalCycles;
+
+                // APR Calculation: (Fee / Principal) * (365 / Term) * 100
+                const apr = (singleCycleFee / amount) * (365 / termDays) * 100;
+
+                // Update UI
+                aprResult.textContent = apr.toFixed(0) + '%';
+                totalFeesResult.textContent = '$' + totalFees.toFixed(2);
+                totalRepaymentResult.textContent = '$' + totalRepayment.toFixed(2);
+
+                // Comparisons (Simple Interest for comparison: P * r * t)
+                const ccInterest = amount * (0.2199) * (totalDays / 365);
+                const locInterest = amount * (0.1050) * (totalDays / 365);
+
+                compPaydayApr.textContent = apr.toFixed(0) + '%';
+                compPaydayCost.textContent = '$' + totalFees.toFixed(2);
+                compCcCost.textContent = '$' + ccInterest.toFixed(2);
+                compLocCost.textContent = '$' + locInterest.toFixed(2);
+
+                updateChart(amount, singleCycleFee, totalCycles);
+            }
+
+            function updateChart(principal, singleFee, totalCycles) {
+                const labels = [];
+                const principalData = [];
+                const feesData = [];
+
+                let accumulatedFees = 0;
+
+                for (let i = 1; i <= totalCycles; i++) {
+                    labels.push(i === 1 ? 'Initial Loan' : 'Rollover ' + (i - 1));
+                    principalData.push(principal);
+                    accumulatedFees += singleFee;
+                    feesData.push(accumulatedFees);
+                }
+
+                if (debtChart) {
+                    debtChart.destroy();
+                }
+
+                debtChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Principal',
+                                data: principalData,
+                                backgroundColor: 'rgba(96, 165, 250, 0.8)',
+                            },
+                            {
+                                label: 'Accumulated Fees',
+                                data: feesData,
+                                backgroundColor: 'rgba(248, 113, 113, 0.8)',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: { color: '#a0aec0' }
+                            },
+                            y: {
+                                stacked: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                ticks: {
+                                    color: '#a0aec0',
+                                    callback: function(value) { return '$' + value; }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#e2e8f0' }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': $' + context.raw.toFixed(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Event Listeners
+            amountInput.addEventListener('input', calculate);
+            feeInput.addEventListener('input', calculate);
+            termInput.addEventListener('input', calculate);
+            cyclesInput.addEventListener('input', calculate);
+
+            // Initial calculation
+            calculate();
+        });
+    </script>
+</body>
+
+</html>
